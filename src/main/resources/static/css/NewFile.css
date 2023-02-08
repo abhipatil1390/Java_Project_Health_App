@@ -1,0 +1,129 @@
+* {
+	margin: 0%;
+	padding: 0%;
+}
+header .head{
+	display: flex;
+	height:25vh;
+	border-bottom: medium;
+	border-bottom-style: dashed;
+
+}
+header .img{
+	
+	width:20%
+}
+
+header .first {
+
+	width:80%;
+	padding: 35px;
+	font-size: 50px;
+	color: navy;
+	text-align: center;
+	background-image: linear-gradient(DodgerBlue, white, yellow);
+}
+
+main {
+	padding-top: 30px; 
+	text-align : center;
+	font-size: 30px;
+	text-align: center;
+	height: 75vh;
+}
+
+main .BMIData {
+
+	margin: 0 auto;
+	border-style: double;
+	box-shadow: 5px 7px purple;
+	border-color: purple;
+	border-radius: 10px;
+	height: 250px;
+	width: 35%;
+}
+
+main .userName{
+	
+	padding-top: 10px;
+}
+main .usrnm{
+	
+	
+	height: 25px;
+	width: 30%;
+}
+main .slht {
+	height: 30px;
+	width: 60px;
+}
+
+main .wtht {
+	height: 30px;
+	width: 60px;
+}
+
+main .slht2 {
+	height: 25px;
+	width: 120px;
+}
+
+main .wtht2 {
+	height: 25px;
+	width: 120px;
+}
+
+main .height {
+	padding: 15px;
+}
+
+main .weight {
+	padding: 15px;
+}
+
+main .btn {
+	padding: 10px;
+}
+
+main .submit {
+	padding: 5px;
+	font-size: 15px;
+	border: 2px solid #4CAF50;
+	border-radius: 5px;
+}
+
+main .reset {
+	font-size: 15px;
+	padding: 5px;
+	border: 2px solid #ff0000;
+	border-radius: 5px;
+}
+
+.submit:hover {
+	background-color: #4CAF50; /* Green */
+	color: white;
+}
+
+.reset:hover {
+	background-color: #ff0000; /* Red */
+	color: white;
+}
+
+.reset:active {
+	background-color: #ff0000;
+	box-shadow: 0 5px #666;
+	transform: translateY(4px);
+}
+
+.submit:active {
+	background-color: #4CAF50;
+	box-shadow: 0 5px #666;
+	transform: translateY(4px);
+}
+/*  .ftr{ */
+/*  padding-top:100px; */
+/*  height: 100px; */
+/*  width: 100%; */
+/* background-image: linear-gradient(blue,white,yellow); */
+/*  margin: 0 auto; */
+/*  } */
