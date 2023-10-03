@@ -1,3 +1,8 @@
+FROM maven:3.9.0-eclipse-temurin-17 as build
+WORKDIR /app
+COPY . .
+RUN mvn clean install
+
 # Use a base image with Java installed
 FROM openjdk:17
 
@@ -5,9 +10,9 @@ FROM openjdk:17
 WORKDIR /app
 
 # Copy the Java application JAR file to the container
-COPY target/Health_BMI-0.0.1-SNAPSHOT.jar /app/Health_BMI-0.0.1-SNAPSHOT.jar
+COPY COPY --from=build /app/target/demoapp.jar /app/
 
 EXPOSE 8000
 
 # Run the Java application when the container starts
-CMD ["java", "-jar", "Health_BMI-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "demoapp.jar"]
