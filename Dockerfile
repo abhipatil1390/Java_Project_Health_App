@@ -10,9 +10,11 @@ FROM openjdk:17
 WORKDIR /app
 
 # Copy the Java application JAR file to the container
-COPY COPY --from=build /app/target/demoapp.jar /app/
+COPY --from=build /app/target/Health_BMI-0.0.1-SNAPSHOT.jar /app
+
+COPY . .
 
 EXPOSE 8000
 
 # Run the Java application when the container starts
-CMD ["java", "-jar", "demoapp.jar"]
+CMD ["java", "-jar", "Health_BMI-0.0.1-SNAPSHOT.jar"]
