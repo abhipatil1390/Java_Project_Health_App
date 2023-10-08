@@ -33,10 +33,10 @@ pipeline {
                 script {
                  sh ('docker login -u $DOCKER_USER_NAME -p $DOCKER_PASS')   
                  sh " echo 'login successfully '"
-                 sh " docker build . -t ${IMAGE_NAME}:${IMAGE_TAG}"
+                 sh " docker build . -t ${IMAGE_NAME}:latest"
                  sh " docker images"
-                 sh " docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:${IMAGE_TAG}"
-                 sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
+                 sh " docker tag ${IMAGE_NAME}:latest ${IMAGE_NAME}:latest"
+                 sh "docker push ${IMAGE_NAME}:latest"
                 }
             }
         
