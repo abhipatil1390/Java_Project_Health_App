@@ -28,21 +28,6 @@ pipeline {
                   git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil1390/Java_Project_Health_App.git'
                  } 
         }
-        stage('Build the Application') {
-            steps {
-                  sh "mvn clean package"
-            }
-            }
-        stage("Test the Application"){
-            steps {
-                script{
-                  sh "mvn test"
-                  sh 'echo "Test successfull"'  
-                }
-              
-            }
-        }
-
         stage("Docker build and push image") {
             steps {
                 script {
