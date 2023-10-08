@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodeapp-deployment
+  labels:
+    app: first_app03
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: first_app03
+  template:
+    metadata:
+      labels:
+        app: first_app03 
+    spec:
+      containers:
+      - name: first_app03
+        image: abhipatil1390/first_app03:latest
+        ports:
+        - containerPort: 8000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeapp-service
+spec:
+  selector:
+    app: first_app03 
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 8000
+    nodePort: 31110
