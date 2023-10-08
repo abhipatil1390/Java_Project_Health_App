@@ -41,13 +41,12 @@ pipeline {
             }
         
         }
-        stage("Deploy the application"){
-            steps { 
-                script{
-                  sh ('docker run -d -p 8000:8000 --name $APP_NAME $IMAGE_NAME:$IMAGE_TAG') 
-                }
-              
-            }
+        stage('Deploying App to Kubernetes') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
         }
+      }
+    }
 }
 }
