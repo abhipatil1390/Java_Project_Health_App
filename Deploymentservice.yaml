@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodeapp-deployment
+  name: HealthApp
   labels:
-    app: first_app03
+    app: HealthApp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: first_app03
+      app: HealthApp
   template:
     metadata:
       labels:
-        app: first_app03 
+        app: HealthApp 
     spec:
       containers:
       - name: first_app03
-        image: abhipatil1390/first_app03:latest
+        image: abhipatil1390/HealthApp:latest
         ports:
         - containerPort: 8000
 
@@ -25,10 +25,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nodeapp-service
+  name: HealthApp
 spec:
   selector:
-    app: first_app03 
+    app: HealthApp 
   type: LoadBalancer
   ports:
   - protocol: TCP
