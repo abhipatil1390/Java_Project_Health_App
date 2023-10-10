@@ -15,7 +15,7 @@ spec:
         app: HealthApp 
     spec:
       containers:
-      - name: first_app03
+      - name: HealthApp
         image: abhipatil1390/HealthApp:latest
         ports:
         - containerPort: 8000
