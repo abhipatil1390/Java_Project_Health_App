@@ -10,7 +10,7 @@ pipeline {
         // Set the JAVA_HOME environment variable to point to the JDK 17 installation path.
         JAVA_HOME = '/var/jenkins_home/tools/hudson.model.JDK/Java17'
         DOCKER_USER_NAME = "abhipatil1390"
-        APP_NAME = "first_app03"
+        APP_NAME = "HealthApp"
         RELEASE = "1.0.0"
         DOCKER_PASS = credentials('dockerpass')
         IMAGE_NAME = "${DOCKER_USER_NAME}" + "/" + "${APP_NAME}"
