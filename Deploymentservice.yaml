@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: HealthApp
+  name: healthapp
   labels:
-    app: HealthApp
+    app: healthapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: HealthApp
+      app: healthapp
   template:
     metadata:
       labels:
-        app: HealthApp 
+        app: healthapp 
     spec:
       containers:
-      - name: HealthApp
-        image: abhipatil1390/HealthApp:latest
+      - name: healthapp
+        image: abhipatil1390/healthapp:latest
         ports:
         - containerPort: 8000
 
@@ -25,10 +25,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: HealthApp
+  name: healthapp
 spec:
   selector:
-    app: HealthApp 
+    app: healthapp 
   type: LoadBalancer
   ports:
   - protocol: TCP
