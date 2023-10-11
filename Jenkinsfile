@@ -37,7 +37,8 @@ pipeline {
             steps {
                 script{
                   sh "mvn test"
-                  sh 'echo " MVN Test successfully"'  
+                  sh 'echo " MVN Test successfully"'
+                 sh "chmod +x /home/ubuntu01/.jenkins/workspace/healthapp/target/Health_BMI-0.0.1-SNAPSHOT.jar"
                 }
               
             }
