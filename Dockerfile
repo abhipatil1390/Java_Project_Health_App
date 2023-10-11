@@ -1,11 +1,13 @@
 # Use a base image with Java installed
-FROM openjdk:17
+FROM eclipse-temurin:17.0.6_10-jdk
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /app2
 
 # Copy the Java application JAR file to the container
-COPY . /app
+COPY . /app2
+
+EXPOSE 8000
 
 # Run the Java application when the container starts
-CMD ["java", "-jar", "Health_BMI-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "Health_BMI-1.0.0.jar"]
