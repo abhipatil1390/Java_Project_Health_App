@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: healthapp
-        image: abhipatil1390/javaproject:latest
+        image: abhipatil1390/javaproject02:latest
         ports:
         - containerPort: 8000
 ---
