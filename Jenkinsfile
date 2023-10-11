@@ -56,9 +56,11 @@ pipeline {
         
         }
         stage('Deploying App to Kubernetes') {
+         steps{
           script{
               sh ('docker run -d -p 8000:8000 $IMAGE_NAME:latest')
           }
+        }
       }
 }
 }
