@@ -10,7 +10,7 @@ FROM eclipse-temurin:17.0.6_10-jdk
 WORKDIR /app2
 
 # Copy the Java application JAR file to the container
-COPY --from=build /app/target/Health_BMI-1.0.0.jar /app2
+#COPY --from=build /app/target/Health_BMI-1.0.0.jar /app2
 
 COPY . .
 
