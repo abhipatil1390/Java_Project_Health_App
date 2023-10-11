@@ -12,9 +12,9 @@ pipeline {
         DOCKER_USER_NAME = "abhipatil1390"
         APP_NAME = "javaproject02"
         RELEASE = "1.0.0"
-        DOCKER_PASS = credentials('dockerpass')
+        //DOCKER_PASS = credentials('dockerpass')
         IMAGE_NAME = "${DOCKER_USER_NAME}" + "/" + "${APP_NAME}"
-        IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
+        IMAGE_TAG = "latest"
         }           
     stages {
          stage("Cleanup Workspace"){
@@ -28,7 +28,7 @@ pipeline {
                   git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil1390/Java_Project_Health_App.git'
                  } 
         }
-        stage('Build application') {
+        stage('Build Application') {
             steps {
                   sh "mvn clean package"
             }
@@ -43,19 +43,22 @@ pipeline {
               
             }
         }
-        stage("Docker build and push image") {
+        stage("Docker Build and Push Image to DockerHub") {
             steps {
                 script {
-                 sh ('docker login -u $DOCKER_USER_NAME -p $DOCKER_PASS')   
+                    withCredentials([string(credentialsId: 'dockerpass', variable: 'DOCKER_PASS')]) {
+                      sh " docker login -u ${DOCKER_USER_NAME} -p ${DOCKER_PASS} "
+                    }
+                 //sh ('docker login -u $DOCKER_USER_NAME -p $DOCKER_PASS')   
                  sh " echo 'login successfully '"
                  sh " docker build . -t ${IMAGE_NAME}:latest"
                  sh " docker tag ${IMAGE_NAME}:latest ${IMAGE_NAME}:latest"
-                 sh "docker push ${IMAGE_NAME}:latest"
+                 sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
                 }
             }
         
         }
-        stage('Deploying App to Kubernetes') {
+        stage('Deploying App on Kubernetes') {
          steps {
            script {
                 kubernetesDeploy (configs: 'Deploymentservice.yaml', kubeconfigId: 'kubernetiesnew')
