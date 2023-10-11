@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . .
 RUN mvn clean install
 # Set execute permissions on the JAR file
-RUN chmod +x /app/target/Health_BMI-1.0.0.jar
+RUN chmod +x /app/target/*.jar
 
 # Stage 2: Use a base image with Java installed
 FROM eclipse-temurin:17.0.6_10-jdk
