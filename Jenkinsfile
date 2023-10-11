@@ -47,7 +47,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'dockerpass', variable: 'DOCKER_PASS')]) {
-                      sh " docker login -u ${DOCKER_USER_NAME} -p ${DOCKER_PASS} "
+                      sh ('docker login -u $DOCKER_USER_NAME -p $DOCKER_PASS') 
                     }
                  //sh ('docker login -u $DOCKER_USER_NAME -p $DOCKER_PASS')   
                  sh " echo 'login successfully '"
