@@ -10,4 +10,4 @@ COPY . /app2
 EXPOSE 8000
 
 # Run the Java application when the container starts
-CMD ["java", "-jar", "Health_BMI-1.0.0.jar"]
+CMD ["java", "-jar", "/tartget/Health_BMI-1.0.0.jar"]
