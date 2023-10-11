@@ -15,8 +15,9 @@ pipeline {
         DOCKER_PASS = credentials('dockerpass')
         IMAGE_NAME = "${DOCKER_USER_NAME}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
-        }
-            stage("Cleanup Workspace"){
+        }           
+    stages {
+         stage("Cleanup Workspace"){
             steps {
                 cleanWs()
                 }  
@@ -53,7 +54,6 @@ pipeline {
             }
         
         }
-    stages {
         stage('Deploying App to Kubernetes') {
       steps {
         script {
