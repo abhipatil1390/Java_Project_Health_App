@@ -7,7 +7,7 @@ WORKDIR /app2
 
 # Copy the Java application JAR file from the previous stage
 #COPY --from=build /app/target/Health_BMI-1.0.0.jar 
-COPY ./home/ubuntu01/.jenkins/workspace/healthapp/target/Health_BMI-1.0.0.jar .
+COPY ./home/ubuntu01/.jenkins/workspace/healthapp/target/Health_BMI-1.0.0.jar ./app2
  
 EXPOSE 8000
 
