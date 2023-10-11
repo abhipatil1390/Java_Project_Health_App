@@ -49,17 +49,16 @@ pipeline {
                  sh ('docker login -u $DOCKER_USER_NAME -p $DOCKER_PASS')   
                  sh " echo 'login successfully '"
                  sh " docker build . -t ${IMAGE_NAME}:latest"
-                 sh " docker tag ${IMAGE_NAME}:latest ${IMAGE_NAME}:latest"
-                 sh "docker push ${IMAGE_NAME}:latest"
+                 //sh " docker tag ${IMAGE_NAME}:latest ${IMAGE_NAME}:latest"
+                 //sh "docker push ${IMAGE_NAME}:latest"
                 }
             }
         
         }
         stage('Deploying App to Kubernetes') {
-      steps {
-        script {
-          kubernetesDeploy (configs: 'Deploymentservice.yaml', kubeconfigId: 'kubernetiesnew')
-        }
+          script{
+              sh ('docker run -d -p 8000:8000 $IMAGE_NAME:latest')
+          }
       }
     }
 }
