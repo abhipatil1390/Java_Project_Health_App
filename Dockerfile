@@ -14,7 +14,7 @@ WORKDIR /app
 
 # Copy the Java application JAR file to the container
 COPY --from=build /app/target/*.jar  /app/target/Health_BMI-1.0.0.jar
-
+RUN chmod +x /app/target/*.jar
 # Expose a port if required
 EXPOSE 8000
 
