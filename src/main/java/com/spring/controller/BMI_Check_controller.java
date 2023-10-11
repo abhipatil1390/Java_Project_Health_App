@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class BMI_Check_controller {
 
-	@RequestMapping("home")
+	@RequestMapping("one")
 	public String home_page() {
 
 		return "NewFile";
