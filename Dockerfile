@@ -5,7 +5,6 @@ WORKDIR /app
 
 # Copy the Java application JAR file to the container
 COPY . .
-RUN chmod +wrx /target/*.jar
 # Expose a port if required
 EXPOSE 8000
 
