@@ -17,44 +17,6 @@ pipeline {
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
         }
     stages {
-        stage("Cleanup Workspace"){
-            steps {
-                cleanWs()
-                }  
-
-           }
-        stage("Code Checkout") {
-            steps{
-                  git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil1390/Java_Project_Health_App.git'
-                 } 
-        }
-        stage('Build application') {
-            steps {
-                  sh "mvn clean package"
-            }
-            }
-        stage("Test Application"){
-            steps {
-                script{
-                  sh "mvn test"
-                  sh 'echo " MVN Test successfull"'  
-                }
-              
-            }
-        }
-        stage("Docker build and push image") {
-            steps {
-                script {
-                 sh ('docker login -u $DOCKER_USER_NAME -p $DOCKER_PASS')   
-                 sh " echo 'login successfully '"
-                 sh " docker build . -t ${IMAGE_NAME}:latest"
-                 sh " docker images"
-                 sh " docker tag ${IMAGE_NAME}:latest ${IMAGE_NAME}:latest"
-                 sh "docker push ${IMAGE_NAME}:latest"
-                }
-            }
-        
-        }
         stage('Deploying App to Kubernetes') {
       steps {
         script {
