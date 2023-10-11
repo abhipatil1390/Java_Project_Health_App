@@ -8,9 +8,9 @@ FROM eclipse-temurin:17.0.6_10-jdk
 
 # Set the working directory inside the container
 WORKDIR /app
-COPY . /app/
+COPY . .
 # Copy the Java application JAR file to the container
-RUN chmod +x /app/target/Health_BMI-1.0.0.jar
+RUN chmod +x /home/ubuntu01/.jenkins/workspace/healthapp/target/Health_BMI-0.0.1-SNAPSHOT.jar
 
 EXPOSE 8000
 
