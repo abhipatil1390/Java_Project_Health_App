@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script{
                  try {
-                     sh "mvn clean packaged"
+                     sh "mvn clean package"
                  }
                        catch (Exception e) {
                         echo "failed mvn"
