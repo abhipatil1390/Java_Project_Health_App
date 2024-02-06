@@ -27,18 +27,26 @@ pipeline {
             steps{
                 script{
                     try {
-                      git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil13908/Java_Project_Health_App.git'
+                      git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil1390/Java_Project_Health_App.git'
                     }
                     catch (Exception e) {
-                        echo "Build Docker Image is failed: ${e.message}"
-                        error("Build Docker Image is failed")
+                        echo "Code Checkout is failed: ${e.message}"
+                        error("Code Checkout is failed")
                     }
                 }
             } 
         }
         stage('Build Application') {
             steps {
-                  sh "mvn clean package"
+                script{
+                 try {
+                     sh "mvn clean packaged"
+                 }
+                       catch (Exception e) {
+                        echo "Build Application: ${e.message}"
+                        error("Build Application is failed")
+                    }
+            }
             }
             }
         stage("Test Application"){
