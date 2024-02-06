@@ -26,7 +26,7 @@ pipeline {
         stage("Code Checkout") {
             steps{
                 try{
-                  git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil1390/Java_Project_Health_App.git'
+                  git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil13908/Java_Project_Health_App.git'
                 }
                 catch (Exception e) {
                         echo "Build Docker Image is failed: ${e.message}"
