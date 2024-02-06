@@ -25,14 +25,16 @@ pipeline {
            }
         stage("Code Checkout") {
             steps{
-                try{
-                  git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil13908/Java_Project_Health_App.git'
-                }
-                catch (Exception e) {
+                script{
+                    try {
+                      git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil13908/Java_Project_Health_App.git'
+                    }
+                    catch (Exception e) {
                         echo "Build Docker Image is failed: ${e.message}"
                         error("Build Docker Image is failed")
                     }
-                } 
+                }
+            } 
         }
         stage('Build Application') {
             steps {
