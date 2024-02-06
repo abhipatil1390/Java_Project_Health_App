@@ -42,7 +42,7 @@ pipeline {
                  try {
                      sh "mvn clean packaged"
                  }
-                       catch () {
+                       catch (Exception e) {
                         echo "failed mvn"
                         error("Build Application is failed")
                     }
