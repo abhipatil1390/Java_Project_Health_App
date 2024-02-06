@@ -25,8 +25,14 @@ pipeline {
            }
         stage("Code Checkout") {
             steps{
+                try{
                   git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil1390/Java_Project_Health_App.git'
-                 } 
+                }
+                catch (Exception e) {
+                        echo "Build Docker Image is failed: ${e.message}"
+                        error("Build Docker Image is failed")
+                    }
+                } 
         }
         stage('Build Application') {
             steps {
@@ -56,14 +62,5 @@ pipeline {
                  sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
                 }
             }
-        
-        }
-        stage('Deploying App on Kubernetes') {
-         steps {
-           script {
-                kubernetesDeploy (configs: 'Deploymentservice.yaml', kubeconfigId: 'kubernetiesnew')
-             }
-        }
-    }
 }
 }
