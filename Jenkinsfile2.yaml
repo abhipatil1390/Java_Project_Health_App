@@ -41,7 +41,8 @@ pipeline {
                 script {
                     // Read the current version from a file or elsewhere
                     def versionFile = readFile('/home/ubuntu01/.jenkins/workspace/healthApp/version.yaml')
-                    echo '${versionFile}'
+                    echo "New version: ${versionFile}"
+                    sh 'cat ${versionFile}'
                     def currentVersion = versionFile.trim()
                        echo '${currentVersion}'
                     // Split the current version into major, minor, and patch parts
