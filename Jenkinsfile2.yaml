@@ -40,21 +40,22 @@ pipeline {
             steps {
                 script {
                     // Read the current version from a file or elsewhere
-                    def versionFile = readFile('/home/ubuntu01/.jenkins/workspace/healthApp/version.txt')
+                    def versionFile = readFile('/home/ubuntu01/.jenkins/workspace/healthApp/version.yaml')
+                    echo '${versionFile}'
                     def currentVersion = versionFile.trim()
-
+                       echo '${currentVersion}'
                     // Split the current version into major, minor, and patch parts
                     def (major, minor, patch) = currentVersion.tokenize('.')
-
+                        echo '${major}+${minor}+${patch}'
                     // Increment the appropriate part (e.g., minor version)
                     minor = minor.toInteger() + 1
-
+                          echo '${versionFile}'
                     // Construct the new semantic version
                     def newVersion = "${major}.${minor}.${patch}"
 
                     // Write the new version back to the file
-                    writeFile(file: '/home/ubuntu01/.jenkins/workspace/healthApp/version.txt', text: newVersion)
-                    sh ' cat  /home/ubuntu01/.jenkins/workspace/healthApp/version.txt'
+                    writeFile(file: '/home/ubuntu01/.jenkins/workspace/healthApp/version.yaml', text: newVersion)
+                    sh ' cat  /home/ubuntu01/.jenkins/workspace/healthApp/version.yaml'
                     // Print the new version for verification
                     echo "New version: ${newVersion}"
                 }
