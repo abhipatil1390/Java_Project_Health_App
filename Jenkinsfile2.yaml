@@ -43,7 +43,7 @@ pipeline {
             steps {
                 script {
                     // Read the current version from a file or elsewhere
-                    def versionFile = readFile('version')
+                    def versionFile = readFile('version.txt')
                     def currentVersion = versionFile.trim()
 
                     // Split the current version into major, minor, and patch parts
@@ -56,8 +56,8 @@ pipeline {
                     def newVersion = "${major}.${minor}.${patch}"
 
                     // Write the new version back to the file
-                    writeFile(file: 'version', text: newVersion)
-
+                    writeFile(file: '/home/ubuntu01/.jenkins/workspace/healthApp/version.txt', text: newVersion)
+                    sh ' cat  /home/ubuntu01/.jenkins/workspace/healthApp/version.txt'
                     // Print the new version for verification
                     echo "New version: ${newVersion}"
                 }
