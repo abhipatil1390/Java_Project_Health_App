@@ -7,13 +7,16 @@ pipeline {
         maven 'Maven3'
         }
     environment {
+        def major = 1
+        def minor = 0
+        def patch = 0
         // Set the JAVA_HOME environment variable to point to the JDK 17 installation path.
         JAVA_HOME = '/var/jenkins_home/tools/hudson.model.JDK/Java17'
         DOCKER_USER_NAME = "abhipatil1390"
         APP_NAME = "javaproject02"
-        RELEASE = "1.0.0"
+        def version = "${major}.${minor}.${patch}"
         //DOCKER_PASS = credentials('dockerpass')
-        IMAGE_NAME = "${DOCKER_USER_NAME}" + "/" + "${APP_NAME}"
+        IMAGE_NAME = "${DOCKER_USER_NAME}" + "/" + "${APP_NAME}" + "${version}"
         IMAGE_TAG = "latest"
         }           
     stages {
@@ -27,51 +30,40 @@ pipeline {
             steps{
                 script{
                     try {
-                      git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil1390/Java_Project_Health_App.git'
+                      git branch: 'master', credentialsId:'github', url: 'https://github.com/abhipatil1390/Java_Project_Health_App.git'
                     }
                     catch (Exception e) {
-                        echo "Code Checkout is failed: ${e.message}"
-                        error("Code Checkout is failed")
+                        echo " Code Checkout is failed: ${e.message} "
+                        error(echo "Code Checkout is failed") 
                     }
                 }
             } 
         }
-        stage('Build Application') {
-            steps {
-                script{
-                 try {
-                     sh "mvn clean package"
-                 }
-                       catch (Exception e) {
-                        echo "failed mvn"
-                        error("Build Application is failed")
-                    }
-            }
-            }
-            }
-        stage("Test Application"){
-            steps {
-                script{
-                  sh "mvn test"
-                  sh 'echo " MVN Test successfully"'
-                 sh "chmod +x /home/ubuntu01/.jenkins/workspace/healthapp/target/*.jar"
-                }
-              
-            }
-        }
-        stage("Docker Build and Push Image to DockerHub") {
+
+        stage('Versioning') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'dockerpass', variable: 'DOCKER_PASS')]) {
-                      sh ('docker login -u $DOCKER_USER_NAME -p $DOCKER_PASS') 
-                    }
-                 //sh ('docker login -u $DOCKER_USER_NAME -p $DOCKER_PASS')   
-                 sh " echo 'login successfully '"
-                 sh " docker build . -t ${IMAGE_NAME}:latest"
-                 sh " docker tag ${IMAGE_NAME}:latest ${IMAGE_NAME}:latest"
-                 sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
+                    // Read the current version from a file or elsewhere
+                    def versionFile = readFile('version')
+                    def currentVersion = versionFile.trim()
+
+                    // Split the current version into major, minor, and patch parts
+                    def (major, minor, patch) = currentVersion.tokenize('.')
+
+                    // Increment the appropriate part (e.g., minor version)
+                    minor = minor.toInteger() + 1
+
+                    // Construct the new semantic version
+                    def newVersion = "${major}.${minor}.${patch}"
+
+                    // Write the new version back to the file
+                    writeFile(file: 'version', text: newVersion)
+
+                    // Print the new version for verification
+                    echo "New version: ${newVersion}"
                 }
             }
         }
+       
 }
 }
