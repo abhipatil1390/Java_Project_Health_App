@@ -33,7 +33,7 @@ pipeline {
                     }
                     catch (Exception e) {
                         echo " Code Checkout is failed: ${e.message} "
-                        error(echo "Code Checkout is failed") 
+                        error("Code Checkout is failed") 
                     }
                 }
             } 
