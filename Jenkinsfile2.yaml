@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     // Read the current version from a file or elsewhere
-                    def versionFile = readFile('/home/ubuntu01/.jenkins/workspace/healthApp/version.yaml')
+                    def versionFile = readFile('/home/ubuntu01/.jenkins/version.yaml')
                     echo "New version: ${versionFile}"
                     sh 'cat ${versionFile}'
                     def currentVersion = versionFile.trim()
@@ -55,7 +55,7 @@ pipeline {
                     def newVersion = "${major}.${minor}.${patch}"
 
                     // Write the new version back to the file
-                    writeFile(file: '/home/ubuntu01/.jenkins/workspace/healthApp/version.yaml', text: newVersion)
+                    writeFile(file: '/home/ubuntu01/.jenkins/version.yaml', text: newVersion)
                     sh ' cat  /home/ubuntu01/.jenkins/workspace/healthApp/version.yaml'
                     // Print the new version for verification
                     echo "New version: ${newVersion}"
