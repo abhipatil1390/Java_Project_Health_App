@@ -57,7 +57,7 @@ pipeline {
                    
                     // Write the new version back to the file
                     writeFile(file: '/home/ubuntu01/.jenkins/version.yaml', text: newVersion)
-                    sh ' cat  /home/ubuntu01/.jenkins/workspace/healthApp/version.yaml'
+                    sh ' cat  /home/ubuntu01/.jenkins/version.yaml'
                     
                     // Print the new version for verification
                     echo "New version: ${newVersion}"
