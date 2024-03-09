@@ -14,9 +14,8 @@ pipeline {
         JAVA_HOME = '/var/jenkins_home/tools/hudson.model.JDK/Java17'
         DOCKER_USER_NAME = "abhipatil1390"
         APP_NAME = "javaproject02"
-        def version = "${major}.${minor}.${patch}"
         //DOCKER_PASS = credentials('dockerpass')
-        IMAGE_NAME = "${DOCKER_USER_NAME}" + "/" + "${APP_NAME}" + "${version}"
+        IMAGE_NAME = "${DOCKER_USER_NAME}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "latest"
         }           
     stages {
