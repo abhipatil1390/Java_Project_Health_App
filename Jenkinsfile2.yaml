@@ -15,8 +15,9 @@ pipeline {
         IMAGE_NAME = "${DOCKER_USER_NAME}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "latest"
         }   
-  parameters {
+        parameters {
         string(name: 'VERSION', defaultValue: 'latest', description: 'Version to deploy (build number, Docker tag, etc.)')
+        choice(name: 'SERVICE', choices: ['service1', 'service2', 'service3'], description: 'Select the microservice to build')
     }
     stages {
          stage("Cleanup Workspace"){
