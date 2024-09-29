@@ -14,7 +14,10 @@ pipeline {
         //DOCKER_PASS = credentials('dockerpass')
         IMAGE_NAME = "${DOCKER_USER_NAME}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "latest"
-        }           
+        }   
+  parameters {
+        string(name: 'VERSION', defaultValue: 'latest', description: 'Version to deploy (build number, Docker tag, etc.)')
+    }
     stages {
          stage("Cleanup Workspace"){
             steps {
