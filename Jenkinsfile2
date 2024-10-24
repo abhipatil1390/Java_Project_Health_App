@@ -21,7 +21,11 @@ pipeline {
     stages {
          stage("Cleanup Workspace"){
             steps {
+            script{
+                    echo "${params.VERSION}"
+                    echo "${params.SERVICE}"
                 cleanWs()
+                    }
                 }  
 
            }
