@@ -67,12 +67,14 @@ pipeline {
         stage("Docker Build and Push Image to DockerHub") {
             steps {
                 script {
+                    sh ' docker build . -t ${IMAGE_NAME}:latest'
+                    
                     withCredentials([string(credentialsId: 'dockerpass', variable: 'DOCKER_PASS')]) {
                       sh ('docker login -u $DOCKER_USER_NAME -p $DOCKER_PASS') 
                     }
                  //sh ('docker login -u $DOCKER_USER_NAME -p $DOCKER_PASS')   
                  sh  'echo "ogin successfully"'
-                 sh ' docker build . -t ${IMAGE_NAME}:latest'
+                 
                  sh ' docker tag ${IMAGE_NAME}:latest ${IMAGE_NAME}:latest'
                  sh 'docker push ${IMAGE_NAME}:${IMAGE_TAG}'
                 }
