@@ -1,5 +1,4 @@
 @Library('my-shared-lib')
-
 pipeline {
     agent any
     parameters {
@@ -30,8 +29,8 @@ pipeline {
             steps{
                 script{
                     try {
-                      //clone('https://github.com/abhipatil1390/Java_Project_Health_App.git', 'master')
-                      git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil1390/Java_Project_Health_App.git'
+                      github('https://github.com/abhipatil1390/Java_Project_Health_App.git', 'master')
+                      //git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil1390/Java_Project_Health_App.git'
                       echo "${params.VERSION}"
                     }
                     catch (Exception e) {
