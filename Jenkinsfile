@@ -1,7 +1,9 @@
-
+@Library(my-shared-lib)
 pipeline {
     agent any
-
+    parameters {
+        string(name: 'VERSION', defaultValue: 'latest', description: 'Version to Rollback or Deploy')
+    }
     tools {
         jdk 'Jdk17'
         maven 'Maven3'
@@ -27,7 +29,9 @@ pipeline {
             steps{
                 script{
                     try {
-                      git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil1390/Java_Project_Health_App.git'
+                      clone('https://github.com/abhipatil1390/Java_Project_Health_App.git', 'master')
+                      //git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil1390/Java_Project_Health_App.git'
+                      sh 'echo ${params.VERSION}' 
                     }
                     catch (Exception e) {
                         echo "Code Checkout is failed: ${e.message}"
