@@ -56,9 +56,10 @@ pipeline {
         stage("Test Application"){
             steps {
                 script{
-                  sh 'mvn test'
-                  sh 'echo " MVN Test successfully"'
-                 sh 'chmod +x /home/ubuntu01/.jenkins/workspace/healthapp/target/*.jar'
+                  //sh 'mvn test'
+                  //sh 'echo " MVN Test successfully"'
+                 //sh 'chmod +x /home/ubuntu01/.jenkins/workspace/healthapp/target/*.jar'
+                    mvn()
                 }
               
             }
