@@ -1,3 +1,3 @@
 def mvn(){
-  sh 'mvn clean package'
+  echo "hi there"
 }
