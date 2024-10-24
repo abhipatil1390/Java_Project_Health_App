@@ -1,7 +1,8 @@
 pipeline {
     agent any
-    parameters {
-        string(name: 'VERSION', defaultValue: 'latest', description: 'Version to Rollback or Deploy')
+        parameters {
+        string(name: 'VERSION', defaultValue: 'latest', description: 'Version to deploy (build number, Docker tag, etc.)')
+        choice(name: 'SERVICE', choices: ['service1', 'service2', 'service3', '$BUILD_NUMBER'], description: 'Select the microservice to build')
     }
     tools {
         jdk 'Jdk17'
@@ -16,10 +17,7 @@ pipeline {
         IMAGE_NAME = "${DOCKER_USER_NAME}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "latest"
         }   
-        parameters {
-        string(name: 'VERSION', defaultValue: 'latest', description: 'Version to deploy (build number, Docker tag, etc.)')
-        choice(name: 'SERVICE', choices: ['service1', 'service2', 'service3', '$BUILD_NUMBER'], description: 'Select the microservice to build')
-    }
+
     stages {
          stage("Cleanup Workspace"){
             steps {
