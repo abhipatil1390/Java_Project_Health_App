@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    parameters {
+        string(name: 'VERSION', defaultValue: 'latest', description: 'Version to Rollback or Deploy')
+    }
     tools {
         jdk 'Jdk17'
         maven 'Maven3'
