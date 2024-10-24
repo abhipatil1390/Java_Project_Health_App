@@ -1,3 +1,3 @@
-def mvn(){
+def call(){
   echo "hi there"
 }
