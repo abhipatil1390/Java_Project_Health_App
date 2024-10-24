@@ -1,4 +1,5 @@
 @Library('my-shared-lib')
+
 pipeline {
     agent any
     parameters {
@@ -29,9 +30,9 @@ pipeline {
             steps{
                 script{
                     try {
-                      clone('https://github.com/abhipatil1390/Java_Project_Health_App.git', 'master')
-                      //git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil1390/Java_Project_Health_App.git'
-                      sh 'echo ${params.VERSION}' 
+                      //clone('https://github.com/abhipatil1390/Java_Project_Health_App.git', 'master')
+                      git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil1390/Java_Project_Health_App.git'
+                      echo "${params.VERSION}"
                     }
                     catch (Exception e) {
                         echo "Code Checkout is failed: ${e.message}"
@@ -44,7 +45,7 @@ pipeline {
             steps {
                 script{
                  try {
-                     sh "mvn clean package"
+                     mvn()
                  }
                        catch (Exception e) {
                         echo "failed mvn"
@@ -56,9 +57,9 @@ pipeline {
         stage("Test Application"){
             steps {
                 script{
-                  sh "mvn test"
+                  sh 'mvn test'
                   sh 'echo " MVN Test successfully"'
-                 sh "chmod +x /home/ubuntu01/.jenkins/workspace/healthapp/target/*.jar"
+                 sh 'chmod +x /home/ubuntu01/.jenkins/workspace/healthapp/target/*.jar'
                 }
               
             }
@@ -70,10 +71,10 @@ pipeline {
                       sh ('docker login -u $DOCKER_USER_NAME -p $DOCKER_PASS') 
                     }
                  //sh ('docker login -u $DOCKER_USER_NAME -p $DOCKER_PASS')   
-                 sh " echo 'login successfully '"
-                 sh " docker build . -t ${IMAGE_NAME}:latest"
-                 sh " docker tag ${IMAGE_NAME}:latest ${IMAGE_NAME}:latest"
-                 sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
+                 sh  'echo "ogin successfully"'
+                 sh ' docker build . -t ${IMAGE_NAME}:latest'
+                 sh ' docker tag ${IMAGE_NAME}:latest ${IMAGE_NAME}:latest'
+                 sh 'docker push ${IMAGE_NAME}:${IMAGE_TAG}'
                 }
             }
         }
