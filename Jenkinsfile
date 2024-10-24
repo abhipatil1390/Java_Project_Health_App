@@ -29,7 +29,7 @@ pipeline {
             steps{
                 script{
                     try {
-                      github('https://github.com/abhipatil1390/Java_Project_Health_App.git', 'master')
+                      github( 'master', 'https://github.com/abhipatil1390/Java_Project_Health_App.git')
                       //git branch: 'master', credentialsId: 'github', poll: false, url: 'https://github.com/abhipatil1390/Java_Project_Health_App.git'
                       echo "${params.VERSION}"
                     }
